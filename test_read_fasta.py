@@ -3,5 +3,5 @@ fasta_file = "test.fasta"
 
 description, sequence = read_fasta(fasta_file)
 
-print(f"Description: {description}")
+print(f"\nDescription: {description}")
 print(f"Sequence: {sequence}")
