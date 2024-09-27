@@ -43,7 +43,7 @@ def read_fasta(file_path):
 
     #Reads FASTA file and returns genome sequence
     
-    description = ""    # Description within FASTA fle
+    description = ""    # Description within FASTA file
     sequence = []       # single genome sequence in file
 
     try:                # Starts a try-except block to handle errors
