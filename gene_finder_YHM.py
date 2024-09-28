@@ -1,4 +1,21 @@
 #gene_finder_YHM
+def ReverseComplement(sequence):
+#Generates the reverse complement of a given DNA sequence
+
+    reverse_pattern = sequence[::-1]  #Reverses the sequence
+    reverse_complement = "" 
+
+    for base in reverse_pattern:
+        if base == "A":
+            reverse_complement += "T"
+        elif base == "T":
+            reverse_complement += "A"
+        elif base == "C":
+            reverse_complement += "G"
+        elif base == "G":
+            reverse_complement += "C"
+    
+    return reverse_complement
 
 def ReadFrames (sequence, frame=0):
 #Takes two arguments: 
@@ -39,7 +56,7 @@ def ReadFrames (sequence, frame=0):
     return found_regions # Returns list of regions found in the given reading frame
 
 
-def read_fasta(file_path):
+def read_fasta_find_regions(file_path):
 
     #Reads FASTA file and returns genome sequence
     
@@ -67,18 +84,34 @@ def read_fasta(file_path):
         print(f"FASTA file description: {description}")
         print(f"Sequence length: {len(sequence)} nucleotides")
 
-        for frame in range(3):
-            possible_frames = ReadFrames(sequence, frame)
-            if possible_frames: 
+        for frame in range(3):  #Loop iterates over the three possible reading frames on the forward strand of DNA
+            found = ReadFrames(sequence, frame) #Calls ReadFrames(), "found" is a list of tuples, where each tuple represents a region found in this frame
+            if found:  #Checks if any regions were found
                 print(f"\n Regions found in reading frame {frame+1}:")
-                for region_data in possible_frames:
-                    frame, start, end, region_sequence = region_data
+                for region_data in found: #inner loop goes through each region in current reading frame
+                    frame, start, end, region_sequence = region_data #Unpacks tuple list (region_data) into four variables
                     print(f" - Region found from position {start + 1} to {end} (length: {end - start}) nucleotides")
-                    print(f"    Sequence: {region_sequence[:60]}{'...' if len(region_sequence) > 60 else '' }")
-            else:
+                    print(f"    Sequence: {region_sequence[:60]}{'...' if len(region_sequence) > 60 else '' }") #if sequence is >60, prints the first 60 nucleotides, followed by ellipsis
+            else: #if no regions were found in the current reading frame, print the following:
                 print(f"\nNo regions found in reading frame {frame + 1}.")
 
-        return description, sequence        # Returns description (string) and complete sequence (as a single string) from function
+        reverse_complement_seq = ReverseComplement(sequence) #generate reverse complement of original data sequence
+
+        for frame in range(3): 
+            #Loop similar to previous but operates on the reverse complement
+            #Iterates over three reading frames: starting from 1rst nucleotide of reverse (frame=0) and so on..
+
+            found = ReadFrames(reverse_complement_seq, frame) #Calls ReadFrames on reverse complement strand
+            if found: 
+                print(f"\nRegions found in reverse complement reading frame {frame + 4}:") # "frame + 4" used to represent frames as 4, 5, 6
+                for region_data in found:
+                    frame, start, end, region_sequence = region_data
+                    print(f" - Region found from position {start + 1} to {end} (length: {end - start} nucleotides)")
+                    print(f"   Sequence: {region_sequence[:60]}{'...' if len(region_sequence) > 60 else '' }")
+            else: 
+                print(f"\nNo regions found in reverse complement reading frame {frame + 4}.")
+        
+        return description, sequence
     
     except FileNotFoundError:               # Catches error if file is not found (ie. wrong file path)
         print(f"Error: The file '{file_path}' was not found.") #prints error message
