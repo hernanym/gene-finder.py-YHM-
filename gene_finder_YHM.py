@@ -90,7 +90,7 @@ def read_fasta_find_regions(file_path):
                 print(f"\n Regions found in reading frame {frame+1}:")
                 for region_data in found: #inner loop goes through each region in current reading frame
                     frame, start, end, region_sequence = region_data #Unpacks tuple list (region_data) into four variables
-                    print(f" - Region found from position {start + 1} to {end} (length: {end - start}) nucleotides")
+                    print(f" - Region found from position {start + 1} to {end} (length: {end - start} nucleotides)")
                     print(f"    Sequence: {region_sequence[:60]}{'...' if len(region_sequence) > 60 else '' }") #if sequence is >60, prints the first 60 nucleotides, followed by ellipsis
             else: #if no regions were found in the current reading frame, print the following:
                 print(f"\nNo regions found in reading frame {frame + 1}.")
