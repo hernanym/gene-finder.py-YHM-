@@ -1,4 +1,7 @@
 #gene_finder_YHM
+
+import argparse
+
 def ReverseComplement(sequence):
 #Generates the reverse complement of a given DNA sequence
 
@@ -119,3 +122,17 @@ def read_fasta_find_regions(file_path):
         print(f"An error occurred while reading the file: {e}") #prints specific error contained in e
         return None, None # If error occurs, function returns none for description and sequence
                           # meaning something went wrong.
+
+# Main function to handle command-line arguments and process the FASTA file
+if __name__ == "__main__":
+    # Initialize the argument parser
+    parser = argparse.ArgumentParser(description="Process a FASTA file and find open reading frames (ORFs).")
+
+    # Add command-line arguments
+    parser.add_argument("file_path", type=str, help="Path to the FASTA file")
+
+    # Parse the command-line arguments
+    args = parser.parse_args()
+
+    # Call the function to read the FASTA file and find regions
+    read_fasta_find_regions(args.file_path)

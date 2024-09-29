@@ -219,9 +219,5 @@ if __name__ == "__main__":
     # Call the unzip_and_process_genomes function with parsed arguments
     unzip_and_process_genomes(args.zip_path, args.output_fasta, min_length=args.min_length, upstream_max=args.upstream_max)
 
-# Path to the NCBI dataset ZIP file and output FASTA file
-#zip_file_path = "NCBI_dataset.zip"
-#output_fasta_file = "SD_sequence.fasta"
-
-# Call the function to unzip and process the genomes and write to a FASTA file
-#unzip_and_process_genomes(zip_file_path, output_fasta_file, min_length=100, upstream_max=20)
+#To Run Function on Bash as Command-Line Arguments: 
+#@hernanym ➜ /workspaces/gene-finder.py-YHM- (main) $ python Shine_Dalgarno_seq.py NCBI_dataset.zip --min_length 100 --upstream_max 20 --output_fasta SD_sequence.fasta
