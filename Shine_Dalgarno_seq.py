@@ -9,6 +9,7 @@ import numpy as np
 import zipfile
 import os
 import glob
+import argparse
 from Bio.Seq import Seq
 
 # Codon table for DNA to protein translation
@@ -204,9 +205,23 @@ def unzip_and_process_genomes(zip_path, output_fasta="SD_sequence.fasta", output
 
     print(f"Processing complete. All proteins written to {output_fasta}")
 
+#Parse command-line arguments 
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Process NCBI genome dataset and filter ORFs based on Shine-Dalgarno sequence and length.")
+    
+    parser.add_argument("zip_path", type=str, help="Path to the NCBI dataset ZIP file")
+    parser.add_argument("--min_length", type=int, default=100, help="Minimum ORF length in codons")
+    parser.add_argument("--upstream_max", type=int, default=20, help="Maximum upstream distance to search for Shine-Dalgarno sequence")
+    parser.add_argument("--output_fasta", type=str, default="SD_sequence.fasta", help="Output FASTA file for processed proteins")
+    
+    args = parser.parse_args()
+
+    # Call the unzip_and_process_genomes function with parsed arguments
+    unzip_and_process_genomes(args.zip_path, args.output_fasta, min_length=args.min_length, upstream_max=args.upstream_max)
+
 # Path to the NCBI dataset ZIP file and output FASTA file
-zip_file_path = "NCBI_dataset.zip"
-output_fasta_file = "SD_sequence.fasta"
+#zip_file_path = "NCBI_dataset.zip"
+#output_fasta_file = "SD_sequence.fasta"
 
 # Call the function to unzip and process the genomes and write to a FASTA file
-unzip_and_process_genomes(zip_file_path, output_fasta_file)
+#unzip_and_process_genomes(zip_file_path, output_fasta_file, min_length=100, upstream_max=20)
