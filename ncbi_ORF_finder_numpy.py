@@ -1,6 +1,7 @@
 # LLM: ChatGPT(Python) Version 4o
 # Prompt: Can you implement NumPy to process the data of my current code (NCBI_ORF_Finder.py)
 
+import argparse
 import numpy as np
 import zipfile
 import os
@@ -182,8 +183,24 @@ def unzip_and_process_genomes(zip_path, output_fasta="processed_proteins.fasta",
     print(f"Processing complete. All proteins written to {output_fasta}")
 
 # Path to the NCBI dataset ZIP file and output FASTA file
-zip_file_path = "NCBI_dataset.zip"
-output_fasta_file = "processed_proteins.fasta"
+#zip_file_path = "NCBI_dataset.zip"
+#output_fasta_file = "processed_proteins.fasta"
 
 # Call the function to unzip and process the genomes and write to a FASTA file
-unzip_and_process_genomes(zip_file_path, output_fasta_file)
+#unzip_and_process_genomes(zip_file_path, output_fasta_file)
+
+# Main logic to parse command-line arguments
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Process NCBI genome dataset and extract ORFs to protein sequences.")
+    
+    # Command-line arguments for the script
+    parser.add_argument("zip_path", type=str, help="Path to the NCBI dataset ZIP file")
+    parser.add_argument("--output_fasta", type=str, default="processed_proteins.fasta", help="Output FASTA file for processed proteins")
+    parser.add_argument("--output_dir", type=str, default="extracted_genomes", help="Directory to extract the ZIP file")
+    parser.add_argument("--min_length", type=int, default=100, help="Minimum ORF length in codons")
+    
+    args = parser.parse_args()
+    
+    # Call the unzip_and_process_genomes function with parsed arguments
+    unzip_and_process_genomes(args.zip_path, args.output_fasta, args.output_dir)
+    
