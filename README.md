@@ -106,8 +106,7 @@ Sequence: ATGCGTACGTAGCTAGTAACTGATGCGTTAACTGCGTACGATGCGTAGTAGCTGACTGAGTACGTAGTGA
 LLM: ChatGPT (Python) 4o
 
 Prompt: 
-Using ReadFASTA code, Could you make the output any region between a start ('ATG') and stop codon ('TAA", 'TAG', 'TGA')
-in that FASTA file; consider three possible reading frames but ignore reverse compliments for now.
+Using ReadFASTA code, output any region between a start ('ATG') and stop codon ('TAA", 'TAG', 'TGA') in that FASTA file; consider three possible reading frames but ignore reverse compliments for now.
 
 '''
 
@@ -246,8 +245,10 @@ No regions found in reading frame 3.
 '''
 LLM: ChatGPT (Python) 4o
 Prompt:
-I would like to extend my current code to include the reverse complement and search in all six possible reading frames for genes. I want you to use the following code for generating reverse complements of a string:  
-'''
+I would like to extend my current code to include the reverse complement
+and search in all six possible reading frames for genes.
+I want you to use the following code for generating reverse complements of a string:  
+
 pattern = "AAAACCCGGT"
 reversePattern = pattern[::-1] 
 reverseComplement = ""
@@ -268,6 +269,7 @@ for base in reversePattern:
 print(reverseComplement)
 
 How would you combine these elements?
+'''
 
 import argparse
 
@@ -441,7 +443,11 @@ No regions found in reverse complement reading frame 6.
 LLM: ChatGPT (Python) 4o
 
 Prompt: 
-Using gene_finder_YHM.py solve the problem of identifying distinct protein strings from open reading frames (ORFs) in a given DNA sequence. Update the code so that it can translate ORFs into protein strings, consider all six reading frames and return every distinct protein string that can be derived from valid ORFs, ensuring translation stops at the first stop codon for each ORF.
+Using gene_finder_YHM.py to solve the problem of identifying distinct protein strings from
+open reading frames (ORFs) in a given DNA sequence. Update the code so that it can translate
+ORFs into protein strings, consider all six reading frames and return every distinct protein
+string that can be derived from valid ORFs, ensuring translation stops at the first stop
+codon for each ORF.
 '''
 
 # Codon table for DNA to protein translation
@@ -608,7 +614,11 @@ MSESTF
 ```python
 '''
 # LLM: ChatGPT(Python) Version 4o
-# Prompt: How can I modify this code (NCBI_ORF_Finder.py) so that using a single command-line I can find all open reading frames in 14 genomes. I also want the code to tell me where its progressing, if there are 14 genomes in total, I want it to tell me 1 of 14, 2 of 14, 3 of 14, as it progresses down the list. I want you to integrate identifiers for the files so that I know which organism is represented by which GCA file when using unzip_and_process_genomes function. Implement numpy to process the data.
+# Prompt: How can I modify this code (NCBI_ORF_Finder.py) so that using a single command-line
+I can find all open reading frames in 14 genomes. I also want the code to tell me where its
+progressing, if there are 14 genomes in total, I want it to tell me 1 of 14, 2 of 14, 3 of
+14, as it progresses down the list. I want you to integrate identifiers for the files so that
+I know which organism is represented by which GCA file when using unzip_and_process_genomes function. Implement numpy to process the data.
 '''
 
 import argparse
@@ -972,8 +982,9 @@ Processing complete. All proteins written to processed_proteins.fasta
 ```python
 '''
 LLM: # LLM: ChatGPT(Python) Version 4o
-# Prompt: Use ncbi_ORF_finder_numpy.py and implement a filter by length,
-# make length a command-line parameter
+# Prompt:
+Use ncbi_ORF_finder_numpy.py and implement a filter by length,
+make length a command-line parameter
 '''
 
 import numpy as np
@@ -1195,7 +1206,11 @@ Processing complete. All proteins written to filtered_proteins.fasta
 ```python
 '''
 # LLM: ChatGPT(Python) Version 4o
-# Prompt: Use the following code {LLengthFilter_ORF.py} add a function that looks for a ribosome binding site which is usually located 4-20bp upstream of the start codon. Scan upstream of the predicted start codon (e.g., -20 bp) and make this a parameter. Filter all predicted ORFs based on whether they contain a Shine-Dalgarno sequence up to 20bp upstream of the start codon.
+# Prompt: Use the following code {LLengthFilter_ORF.py} add a function that looks for a
+ribosome binding site which is usually located 4-20bp upstream of the start codon. Scan
+upstream of the predicted start codon (e.g., -20 bp) and make this a parameter. Filter all
+predicted ORFs based on whether they contain a Shine-Dalgarno sequence up to 20bp upstream
+of the start codon.
 '''
 
 import numpy as np
@@ -1419,8 +1434,8 @@ python Shine_Dalgarno_seq.py NCBI_dataset.zip --min_length 100 --upstream_max 20
 ### Output is a FASTA file 
 ```
 ... same
-.. as 
-. code above
+..  as 
+.   code above
 
 Proteins successfully written to SD_sequence.fasta
 Processing complete. All proteins written to SD_sequence.fasta
