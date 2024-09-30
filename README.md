@@ -5,7 +5,7 @@ This tool processes genome data in `.fna` format from a compressed `.zip` datase
 - **ReadFASTA.py** - Takes command line parameters for a FASTA file containing a genome
 - **ReadFASTA_3Frames.py** - Considers 3 Reading Frames
 - **gene_finder_YHM.py** - Finds all six possible reading frames for genes and applies reverse complement.
-- 
+- **OpenReadingFrames_YHM.py** - Solves Rosalind Problem (72)
 - **ncbi_ORF_finder_numpy.py** - Finds all Open Reading Frames of the 14 genomes (NCBI bacteria dataset)
 - **LengthFilter_ORF.py** - Takes length as a parameter and filters ORFs
 - **Shine-Dalgarno Sequence Detection** - Filters ORFs based on the presence of a Shine-Dalgarno sequence upstream of the start codon.
@@ -1429,6 +1429,7 @@ python Shine_Dalgarno_seq.py NCBI_dataset.zip --min_length 100 --upstream_max 20
 ... same
 .. as 
 . code above
+
 Proteins successfully written to SD_sequence.fasta
 Processing complete. All proteins written to SD_sequence.fasta
 ```
