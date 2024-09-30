@@ -1,6 +1,7 @@
 # LLM: ChatGPT(Python) Version 4o
 # Prompt: Can you implement NumPy to process the data of my current code (NCBI_ORF_Finder.py)
 
+import argparse
 import numpy as np
 import zipfile
 import os
